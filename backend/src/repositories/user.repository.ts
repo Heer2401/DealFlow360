@@ -16,21 +16,29 @@ export type CreateUserDTO = Omit<User, 'id' | 'created_at' | 'updated_at'>;
 
 export class UserRepository {
   async findByEmail(email: string): Promise<User | null> {
-    const result = await pool.query('SELECT * FROM users WHERE email = $1', [email]);
+    const result = await pool.query(
+      'SELECT id, full_name AS name, email, password_hash, role, created_at, updated_at FROM users WHERE email = $1',
+      [email]
+    );
     return result.rows[0] || null;
   }
 
   async findById(id: string): Promise<User | null> {
-    const result = await pool.query('SELECT * FROM users WHERE id = $1', [id]);
+    const result = await pool.query(
+      'SELECT id, full_name AS name, email, password_hash, role, created_at, updated_at FROM users WHERE id = $1',
+      [id]
+    );
     return result.rows[0] || null;
   }
 
   async create(user: CreateUserDTO): Promise<User> {
     const { name, email, password_hash, role } = user;
+
     const result = await pool.query(
-      'INSERT INTO users (name, email, password_hash, role) VALUES ($1, $2, $3, $4) RETURNING *',
+      'INSERT INTO users (full_name, email, password_hash, role) VALUES ($1, $2, $3, $4) RETURNING id, full_name AS name, email, password_hash, role, created_at, updated_at',
       [name, email, password_hash, role]
     );
+
     return result.rows[0];
   }
 }
