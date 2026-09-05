@@ -1,7 +1,8 @@
 import express, { Request, Response, NextFunction } from 'express';
 import cors from 'cors';
+import { router } from './routes';
 
-const app = express();
+export const app = express();
 
 app.use(cors());
 app.use(express.json());
@@ -11,14 +12,17 @@ app.get('/api/health', (req: Request, res: Response) => {
   res.json({ status: 'ok' });
 });
 
-// 404 Handler
+// Main router
+app.use('/api', router);
+
+// Basic 404 handler
 app.use((req: Request, res: Response, next: NextFunction) => {
   res.status(404).json({ error: 'Not Found' });
 });
 
-// Basic Error Handler
-app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
-  console.error(err.stack);
+// Basic error handler
+app.use((err: any, req: Request, res: Response, next: NextFunction) => {
+  console.error(err.stack || err);
   res.status(500).json({ error: 'Internal Server Error' });
 });
 
