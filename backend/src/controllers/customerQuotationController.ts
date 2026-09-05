@@ -3,7 +3,7 @@ import * as service from '../services/customerQuotationService';
 
 export const listQuotations = async (req: Request, res: Response) => {
   try {
-    const userId = req.user!.id;
+    const userId = (req as any).user!.id;
     const quotations = await service.getCustomerQuotations(userId);
     res.json(quotations);
   } catch (error: any) {
@@ -16,7 +16,7 @@ export const listQuotations = async (req: Request, res: Response) => {
 
 export const getQuotation = async (req: Request, res: Response) => {
   try {
-    const userId = req.user!.id;
+    const userId = (req as any).user!.id;
     const quotationId = req.params.id as string;
     const quotation = await service.getCustomerQuotationDetails(userId, quotationId);
     res.json(quotation);
@@ -30,7 +30,7 @@ export const getQuotation = async (req: Request, res: Response) => {
 
 export const acceptQuotation = async (req: Request, res: Response) => {
   try {
-    const userId = req.user!.id;
+    const userId = (req as any).user!.id;
     const quotationId = req.params.id as string;
     const updated = await service.acceptQuotation(userId, quotationId);
     res.json(updated);

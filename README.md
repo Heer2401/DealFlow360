@@ -6,7 +6,7 @@ DealFlow360 is an Intelligent, Self-Governing B2B Sales Operations Platform.
 To provide a foundational architecture for managing B2B sales operations such as quotations, discounts, risks, and approvals.
 
 ## Tech Stack
-**Frontend:** React, TypeScript, Vite, Tailwind CSS, shadcn/ui, React Router, Recharts.  
+**Frontend:** React, TypeScript, Vite, Tailwind CSS, React Router, Recharts.  
 **Backend:** Node.js, Express, TypeScript, REST API, Zod.  
 **Database:** PostgreSQL, node-postgres (`pg`). NO ORM.
 

@@ -1,12 +1,12 @@
 import { Router } from 'express';
 import { listQuotations, getQuotation, acceptQuotation } from '../controllers/customerQuotationController';
-import { authenticate, requireRole } from '../middleware/authMiddleware';
+import { authMiddleware, requireRole } from '../middleware/auth.middleware';
 
 const router = Router();
 
 // Ensure all customer routes are authenticated and restricted to CUSTOMER role
-router.use(authenticate);
-router.use(requireRole(['CUSTOMER']));
+router.use(authMiddleware);
+router.use(requireRole(['CUSTOMER' as any]));
 
 router.get('/quotations', listQuotations);
 router.get('/quotations/:id', getQuotation);
