@@ -30,6 +30,16 @@ DealFlow360/
 1. Clone the repository and switch to your branch: `git checkout <branch-name>`
 2. Create `.env` files in both `frontend` and `backend` based on `.env.example`.
 
+### Database Setup
+We intentionally use direct PostgreSQL access via `pg` (NO Prisma/ORM) to maintain full control over SQL and leverage native Postgres constraints.
+1. Create a local PostgreSQL database (e.g., `dealflow360`).
+2. Set your `DATABASE_URL` in `backend/.env` (e.g., `postgres://user:pass@localhost:5432/dealflow360`).
+3. Run the migrations and seed data:
+```bash
+cd backend
+npm run db:setup
+```
+
 ### Frontend
 ```bash
 cd frontend
