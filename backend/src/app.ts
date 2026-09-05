@@ -1,10 +1,17 @@
 import express, { Request, Response, NextFunction } from 'express';
 import cors from 'cors';
 
+import authRoutes from './routes/authRoutes';
+import customerRoutes from './routes/customerRoutes';
+
 const app = express();
 
 app.use(cors());
 app.use(express.json());
+
+// Routes
+app.use('/api/auth', authRoutes);
+app.use('/api/customer', customerRoutes);
 
 // Health Check
 app.get('/api/health', (req: Request, res: Response) => {

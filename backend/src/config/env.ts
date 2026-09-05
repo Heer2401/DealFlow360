@@ -6,6 +6,7 @@ dotenv.config();
 const envSchema = z.object({
   PORT: z.string().optional().default('3000'),
   DATABASE_URL: z.string().url(),
+  JWT_SECRET: z.string().default('your_super_secret_jwt_key_here'),
 });
 
 const parsed = envSchema.safeParse(process.env);
